@@ -3,5 +3,5 @@
 @import '../styles/reset.css';
 
 * {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Inter', sans-serif;
 }
