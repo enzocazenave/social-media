@@ -1,6 +1,6 @@
-import { useContext } from "react"
-import api from "../api/api";
-import { AuthContext } from "../context/ AuthContext"
+import { useContext } from 'react'
+import api from '../api/api';
+import { AuthContext } from '../context/AuthContext';
 
 export const useAuthContext = () => {
     const { user, status, errorMessage, setUser, setStatus, setErrorMessage } = useContext(AuthContext);
@@ -17,6 +17,8 @@ export const useAuthContext = () => {
         try {
             const { data } = await api.post('/auth/login', credentials);
             delete data.ok;
+
+            window.localStorage.setItem('@social_media:token', data.token);
 
             setUser(data);
             setStatus('authenticated');
@@ -42,6 +44,8 @@ export const useAuthContext = () => {
             const { data } = await api.post('/auth/register', credentials);
             delete data.ok;
 
+            window.localStorage.setItem('@social_media:token', data.token);
+
             setUser(data);
             setStatus('authenticated');
             setErrorMessage('');
@@ -51,6 +55,8 @@ export const useAuthContext = () => {
     }
 
     const logout = async(message = '') => {
+        window.localStorage.removeItem('@social_media:token');
+        console.log('logo')
         setUser({});
         setStatus('not-authenticated');
         setErrorMessage(message);
