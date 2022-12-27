@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import styles from '../../styles/auth/pages/AuthPage.module.css/';
 import { Eslogan } from '../components/';
 
@@ -12,11 +13,11 @@ export const LoginPage = () => {
 
     const { user, password, onInputChange } = useForm(initialForm);
     const disableButton = user.length === 0 || password.length === 0;  
+    const { errorMessage, login } = useAuthContext();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log({ user, password });
+        login({ user, password });
     } 
 
     return (
@@ -48,6 +49,8 @@ export const LoginPage = () => {
                 >
                     Iniciar sesión
                 </button>
+
+                { (errorMessage.length !== 0) && <p className={ styles.text } style={{ color: 'red' }}>{ errorMessage }</p> }
 
                 <p className={ styles.text }>¿Has olvidado la contraseña?</p>
 

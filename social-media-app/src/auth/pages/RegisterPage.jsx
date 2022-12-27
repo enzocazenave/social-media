@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import styles from '../../styles/auth/pages/AuthPage.module.css/';
 import { Eslogan } from '../components/';
 
@@ -14,11 +15,11 @@ const initialForm = {
 export const RegisterPage = () => {
 
     const { username, email, name, surname, password, onInputChange } = useForm(initialForm); 
+    const { errorMessage, register } = useAuthContext();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log({ username, email, name, surname, password });
+        register({ username, email, name, surname, password })
     } 
 
     return (
@@ -74,6 +75,8 @@ export const RegisterPage = () => {
                 >
                     Crear cuenta
                 </button>
+
+                { (errorMessage.length !== 0) && <p className={ styles.text } style={{ color: 'red' }}>{ errorMessage }</p> }
 
                 <Link className={ `${ styles.button } ${ styles.buttonGreen }` } to="/auth/login">
                     ¿Ya tienes cuenta?
