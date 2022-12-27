@@ -5,7 +5,7 @@ import { AppRouter } from './router/AppRouter';
 import './styles/global.css';
 
 createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
+    <BrowserRouter>    
         <AppRouter />
     </BrowserRouter>,
 );

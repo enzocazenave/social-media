@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    min-width: 40rem;
+    max-width: 40rem;
+}
+
+.title {
+    color: rgb(218, 142, 43);
+    font-size: 2em;
+    text-align: center;
+}
+
+.text {
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 1.3;
+}
