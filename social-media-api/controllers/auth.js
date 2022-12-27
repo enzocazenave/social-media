@@ -1,7 +1,8 @@
 const { response } = require('express');
 const { unknownError } = require('../helpers/unknownError');
-const User = require('../models/User');
 const { genSaltSync, hashSync, compareSync } = require('bcryptjs');
+const { sign } = require('jsonwebtoken');
+const User = require('../models/User');
 
 const registerUser = async(req, res = response) => {
     const { username, email, password } = req.body;
@@ -31,13 +32,13 @@ const registerUser = async(req, res = response) => {
 
         await user.save();
 
-        delete user._doc.__v;
-        delete user._doc._id;
-        delete user._doc.password;
+        const payload = { username };
+        const token = sign(payload, process.env.SECRET_TOKEN_KEY, { expiresIn: '2h' });
+        payload.token = token;
 
         res.status(201).json({
             ok: true,
-            ...user._doc
+            ...payload
         });
     } catch(error) {
         unknownError(res, error);
@@ -65,20 +66,23 @@ const loginUser = async(req, res = response) => {
             msg: 'Sus credenciales son incorrectas.'
         });
 
-        delete user._doc.__v;
-        delete user._doc._id;
-        delete user._doc.password;
+        const payload = { username: user.username };
+        const token = sign(payload, process.env.SECRET_TOKEN_KEY, { expiresIn: '2h' });
+        payload.token = token;
 
         res.status(201).json({
             ok: true,
-            ...user._doc
+            ...payload
         });
     } catch(error) {
         unknownError(res, error);
     }
 }
 
+const renewUser = async(req, res = response) => res.status(200).json({ ok: true, ...req.body });
+
 module.exports = {
     registerUser, 
-    loginUser
+    loginUser,
+    renewUser
 }
