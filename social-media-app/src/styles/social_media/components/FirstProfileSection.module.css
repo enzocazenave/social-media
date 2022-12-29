@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+}
+
+.profileImage {
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 50%;
+}
+
+.containerData {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.firstLine {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.firstLineButton {
+    background-color: #0095F6;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: .3rem;
+    border-radius: .25rem;
+    font-weight: 600;
+}
+
+.firstLineButtonFollowed {
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.245);
+    border: none;
+    outline: none;
+    padding: .3rem;
+    border-radius: .25rem;
+    font-weight: 600;
+}
+
+.username {
+    font-size: 1.75em;
+    font-weight: 300;
+}
+
+.data {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 1em;
+}
+
+.dataItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.dataItemNumber {
+    font-weight: 600;
+}
+
+.moreDataName {
+    font-weight: 600;
+}

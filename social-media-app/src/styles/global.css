@@ -3,5 +3,10 @@
 @import '../styles/reset.css';
 
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: -apple-system, sans-serif;
+}
+
+.container {
+    margin: 0 30rem;
+    height: 100vh;
 }

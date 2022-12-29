@@ -24,7 +24,6 @@ export const useAuthContext = () => {
             setStatus('authenticated');
             setErrorMessage('');
         } catch(error) {
-            console.log(error.response.data.msg);
             logout(error.response.data.msg);
         }
     }
@@ -56,7 +55,6 @@ export const useAuthContext = () => {
 
     const logout = async(message = '') => {
         window.localStorage.removeItem('@social_media:token');
-        console.log('logo')
         setUser({});
         setStatus('not-authenticated');
         setErrorMessage(message);

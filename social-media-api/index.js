@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(logger('dev'));
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api', require('./routes/helpers'));
 
 app.listen(PORT, () => {
     console.log(`\nSTARTING BACKEND\n✔  http://localhost:${ PORT }`);
