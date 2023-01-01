@@ -1,5 +1,5 @@
 import styles from '../../styles/social_media/components/FirstProfileSection.module.css';
-const defaultImage = 'https://avatars.githubusercontent.com/u/102680110?v=4';
+const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
 export const FirstProfileSection = ({ user, isMine = false }) => {
     const { image, username, name, surname, bio } = user;
@@ -38,7 +38,7 @@ export const FirstProfileSection = ({ user, isMine = false }) => {
                 </div> 
                 <div className={ styles.moreData }>
                     <span className={ styles.moreDataName }>{ name } { surname }</span>
-                    <p>{ bio }</p>
+                    <p className={ styles.moreDataBio }>{ bio }</p>
                 </div>
             </div>
         </div>

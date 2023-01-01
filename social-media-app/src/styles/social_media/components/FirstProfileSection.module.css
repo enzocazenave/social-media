@@ -1,8 +1,8 @@
 .container {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 6rem;
+    margin-top: 6rem;
 }
 
 .profileImage {
@@ -67,4 +67,8 @@
 
 .moreDataName {
     font-weight: 600;
+}
+
+.moreDataBio {
+    margin-top: .5rem;
 }

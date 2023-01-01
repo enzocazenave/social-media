@@ -1,0 +1,29 @@
+.post {
+    background-image: url(https://images.unsplash.com/photo-1624904619556-b1921bbcbdd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGFtb2xlZCUyMHdhbGxwYXBlcnN8ZW58MHx8MHx8&w=1000&q=80);
+    background-size: cover;
+    width: 15rem;
+    height: 15rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: background .5s;
+    cursor: pointer;
+    border-radius: .3rem;
+}
+
+.post span {
+    color: #fff;
+    display: flex;
+    gap: .5rem;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.post:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1624904619556-b1921bbcbdd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGFtb2xlZCUyMHdhbGxwYXBlcnN8ZW58MHx8MHx8&w=1000&q=80);
+    background-size: cover;
+}
+
+.post:hover > span {
+    opacity: 1;
+}

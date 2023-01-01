@@ -9,6 +9,8 @@
     gap: 10rem;
     border-bottom: 1px solid rgb(182, 182, 182);
     margin-bottom: 2rem;
+    position: fixed;
+    background-color: #fff;
 }
 
 .brand {
@@ -31,6 +33,23 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.5em;
+    padding: .5rem;
+}
+
+.menuItemSelected {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+    border-radius: 1rem;
+    padding: .5rem;
     border: none;
     outline: none;
     text-decoration: none;

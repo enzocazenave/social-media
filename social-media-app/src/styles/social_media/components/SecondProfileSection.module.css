@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    -webkit-scrollbar: none;
+    overflow-x: auto;
+    padding: .5rem;
+    gap: 2rem;
+    height: fit-content;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.historyImage {
+    width: 4.8125rem;
+    height: 4.8125rem;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: .1875rem;
+    border: .125rem solid rgb(199, 199, 199);
+}
+
+.historyTitle {
+    text-align: center;
+    font-size: .875em;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

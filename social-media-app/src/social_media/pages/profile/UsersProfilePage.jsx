@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserByUsername } from '../../../helpers';
-import { FirstProfileSection } from '../../components';
+import { FirstProfileSection, SecondProfileSection, ThirdProfileSection } from '../../components';
 
 export const UsersProfilePage = () => {
     const { username } = useParams();
@@ -13,7 +13,16 @@ export const UsersProfilePage = () => {
     
     return (
         <div className="container">
-            <FirstProfileSection user={ user } />
+            {
+                (typeof user === 'string') 
+                ? <h1 style={{ marginTop: '6rem' }}>{ user }</h1>
+                : <>
+                    <FirstProfileSection user={ user } />
+                    <SecondProfileSection />
+                    <ThirdProfileSection />
+                </>
+            }
+            
         </div>
     )
 }

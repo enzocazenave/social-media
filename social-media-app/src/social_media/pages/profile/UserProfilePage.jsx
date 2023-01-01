@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserByUsername } from '../../../helpers';
-import { FirstProfileSection } from '../../components';
+import { FirstProfileSection, SecondProfileSection, ThirdProfileSection } from '../../components';
 
 export const UserProfilePage = () => {
     const { username } = useParams();
@@ -14,6 +14,8 @@ export const UserProfilePage = () => {
     return (
         <div className="container">
             <FirstProfileSection user={ user } isMine />
+            <SecondProfileSection />
+            <ThirdProfileSection isMine />
         </div>
     )
 }

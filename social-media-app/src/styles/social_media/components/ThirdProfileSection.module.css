@@ -1,0 +1,42 @@
+.container {
+    width: 100%;
+}
+
+.line {
+    width: 100%;
+    height: .125rem;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.button {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    text-decoration: none;
+    color: #000;
+    transition: background .6s;
+    border-radius: .5rem;
+}
+
+.button:hover {
+    background-color: rgb(235,235,235);
+}
+
+.postsContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
+    gap: 1rem;
+}
