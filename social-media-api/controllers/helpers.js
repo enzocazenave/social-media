@@ -8,7 +8,7 @@ const getUserByUsername = async(req, res = response) => {
     try {
         const user = await User.findOne({ username });
         
-        if (!user) return res.status(401).json({
+        if (!user) return res.status(404).json({
             ok: false,
             msg: 'Usuario no encontrado.'
         });
@@ -26,6 +26,16 @@ const getUserByUsername = async(req, res = response) => {
     }
 }
 
+const createUserPost = async(req, res = response) => {
+    const { title, imageUrl } = req.body;
+
+    res.status(200).json({
+        ok: true,
+        ...req.body
+    });
+}
+
 module.exports = {
-    getUserByUsername
+    getUserByUsername,
+    createUserPost
 }

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { UiContext } from '../../context/UiContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import styles from '../../styles/social_media/components/Navbar.module.css';
 const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
@@ -7,21 +8,19 @@ const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profi
 export const Navbar = () => {
 
     const { user } = useAuthContext();
-    const [focused, setFocused] = useState(false);
+    const { setCreatePostModalIsOpen } = useContext(UiContext)
 
     return (
         <div className={ styles.container }>
             <h1 className={ styles.brand }>HistoryTime</h1>
 
             <div className={ styles.searchBar }>
-                { (!focused) && <i className="fas fa-magnifying-glass"></i> }
+                <i className="fas fa-magnifying-glass"></i>
 
                 <input
                     className={ styles.input }
                     type="text"
                     placeholder="Buscar"
-                    onFocus={ () => setFocused(true) }
-                    onBlur={ () => setFocused(false) }
                 />
             </div>
 
@@ -29,11 +28,12 @@ export const Navbar = () => {
                 <NavLink className={ ({ isActive }) => isActive ? styles.menuItemSelected : styles.menuItem } to="/" >
                     <i className='fas fa-home'></i>
                 </NavLink>
-                {/*
-                    <button className={ ({ isActive }) => isActive ? styles.menuItemSelected : styles.menuItem }>
-                        <i className='far fa-plus-square'></i>
-                    </button>
-                */}
+                <button 
+                    className={ styles.menuItem }
+                    onClick={ () => setCreatePostModalIsOpen(true) }
+                >
+                    <i className='far fa-plus-square'></i>
+                </button>
                 <NavLink className={ ({ isActive }) => isActive ? styles.menuItemSelected : styles.menuItem } to="/explore" >
                     <i className='far fa-compass'></i>
                 </NavLink>
