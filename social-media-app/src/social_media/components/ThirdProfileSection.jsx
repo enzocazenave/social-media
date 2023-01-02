@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import styles from '../../styles/social_media/components/ThirdProfileSection.module.css';
 import { Link } from 'react-router-dom';
-import { Post } from './Post';
+import { Post } from './';
 
 export const ThirdProfileSection = ({ isMine = false }) => {
 

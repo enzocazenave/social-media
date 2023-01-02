@@ -1,0 +1,135 @@
+.container {
+    margin-top: 6rem;
+    display: flex;
+    height: calc(100vh - 8rem);
+    border-radius: .5rem
+}
+
+.leftContainer {
+    width: 60%;
+    background-color: #010101;
+    object-fit: contain;
+    border-bottom-left-radius: .5rem;
+    border-top-left-radius: .5rem;
+}
+
+.rightContainer {
+    width: 40%;
+    background-color: rgb(240,240,240);
+    border-radius: .5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.rightContainerHeader {
+    display: flex; 
+    align-items: center;
+    border-bottom: 1px solid rgb(195,195,195);
+    background-color: rgb(240,240,240);
+    padding: 1rem;
+    justify-content: space-between;
+}
+
+.rightContainerHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.profileImage {
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+}
+
+.profileUsername {
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.options {
+    background-color: transparent;
+    border: none;
+    outline: none    
+}
+
+.comments {
+    padding-top: .5rem;
+    height: 100%;
+    overflow: auto;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid rgb(195,195,195);
+}
+
+.footerButtons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footerButtonsLeft {
+    display: flex;
+    gap: 1rem;
+}
+
+.footerButton {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 1.4em;
+}
+
+.footerTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.footerText {
+    font-size: .8em;
+}
+
+.footerTextDate {
+    font-size: .6em;
+    font-weight: 500;
+    color: rgb(163, 163, 163);
+}
+
+.footerTextSpan {
+    font-weight: 600;
+}
+
+.footerPostComment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerPostCommentInput {
+    background-color: transparent;
+    font-size: .9em;
+    border: none;
+    outline: none;
+}
+
+.footerPostCommentButton {
+    background-color: transparent;
+    color: rgb(4, 171, 255);
+    border: none;
+    outline: none;
+    font-size: .9em;
+    transition: color .4s;
+    padding: 0
+}
+
+.footerPostCommentButtonDisabled {
+    color: rgba(4, 171, 255, 0.427);
+}

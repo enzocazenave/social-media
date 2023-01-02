@@ -5,7 +5,14 @@ export const HomePage = () => {
 
     return (
         <div className="container">
-            <button onClick={ () => logout() }>Cerrar sesion</button>
+            <button 
+                onClick={ () => logout() }
+                style={{
+                    marginTop: '6rem'
+                }}
+            >
+                Cerrar sesion
+            </button>
         </div>
     );
 }

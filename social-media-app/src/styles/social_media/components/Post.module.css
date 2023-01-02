@@ -9,6 +9,7 @@
     transition: background .5s;
     cursor: pointer;
     border-radius: .3rem;
+    text-decoration: none;
 }
 
 .post span {
