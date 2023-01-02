@@ -6,10 +6,18 @@ import { FirstProfileSection, SecondProfileSection, ThirdProfileSection } from '
 export const UsersProfilePage = () => {
     const { username } = useParams();
     const [user, setUser] = useState({});
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        getUserByUsername(username).then(res => setUser(res));
+        getUserByUsername(username).then(res => {
+            setUser(res);
+            setReady(true);
+        });
     }, []);
+    
+    if (!ready) return (
+        <h1>Cargando...</h1>
+    )
     
     return (
         <div className="container">
