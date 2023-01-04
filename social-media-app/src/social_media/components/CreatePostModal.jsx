@@ -5,14 +5,17 @@ import styles from '../../styles/social_media/components/CreatePostModal.module.
 
 Modal.setAppElement('#root');
 
+const initialForm = {
+    title: ''
+}
+
 export const CreatePostModal = () => {
 
     const { createPostModalIsOpen, setCreatePostModalIsOpen } = useContext(UiContext);
     const [isImageInMemory, setIsImageInMemory] = useState(false);
+    const { title, onInputChange } = useState(initialForm);
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef();
-
-    console.log(selectedImage);
 
     return (
         <Modal
@@ -75,6 +78,9 @@ export const CreatePostModal = () => {
                                     type="text" 
                                     className={ styles.postTitleInput } 
                                     placeholder="Agrega un pie de foto..."
+                                    name="title"
+                                    value={ title }
+                                    onChange={ onInputChange }
                                 />
                             </div>
                         </div>
