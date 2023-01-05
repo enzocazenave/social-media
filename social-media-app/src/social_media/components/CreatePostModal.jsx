@@ -1,6 +1,8 @@
 import { useContext, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { UiContext } from '../../context/UiContext';
+import { uploadImage } from '../../helpers';
+import { usePosts } from '../../hooks';
 import styles from '../../styles/social_media/components/CreatePostModal.module.css';
 
 Modal.setAppElement('#root');
@@ -13,9 +15,22 @@ export const CreatePostModal = () => {
 
     const { createPostModalIsOpen, setCreatePostModalIsOpen } = useContext(UiContext);
     const [isImageInMemory, setIsImageInMemory] = useState(false);
-    const { title, onInputChange } = useState(initialForm);
+    const { title, onInputChange, onResetForm } = useState(initialForm);
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef();
+    const { uploadPost } = usePosts();
+
+    const onPublishPost = () => uploadImage(selectedImage).then(({ ok, url = undefined }) => {
+        if (!ok) {
+            setIsImageInMemory(false);
+            setSelectedImage(null);
+            setCreatePostModalIsOpen(false);
+            onResetForm();
+            return;
+        }
+
+        uploadPost(url, title);
+    });
 
     return (
         <Modal
@@ -86,6 +101,7 @@ export const CreatePostModal = () => {
                         </div>
                         <button
                             className={ styles.postButton }
+                            onClick={ onPublishPost }
                         >
                             Publicar
                         </button>

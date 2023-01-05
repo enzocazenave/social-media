@@ -1,6 +1,7 @@
 const { response } = require('express');
 const { unknownError } = require('../helpers/unknownError');
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 const getUserByUsername = async(req, res = response) => {
     const { username } = req.params;
@@ -27,12 +28,26 @@ const getUserByUsername = async(req, res = response) => {
 }
 
 const createUserPost = async(req, res = response) => {
-    const { title, imageUrl } = req.body;
+    const { username } = req.body;
 
-    res.status(200).json({
-        ok: true,
-        ...req.body
-    });
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) return res.status(404).json({
+            ok: false,
+            msg: 'Usuario no encontrado o sesión no válida.'
+        });
+
+        const post = new Post(req.body);
+        await post.save();
+
+        res.status(200).json({
+            ok: true,
+            postId: post.uid
+        });
+    } catch(error) {
+        unknownError(res, error);
+    }
 }
 
 module.exports = {
