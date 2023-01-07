@@ -1,12 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import styles from '../../styles/social_media/components/ThirdProfileSection.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Post } from './';
+import { usePosts } from '../../hooks';
 
 export const ThirdProfileSection = ({ isMine = false }) => {
 
-    const { user } = useContext(AuthContext);
+    const { getAllPostsByUsername } = usePosts();
+    const [posts, setPosts] = useState([]);
+    const location = useLocation();
+
+    useEffect(() => {
+        getAllPostsByUsername(location.pathname.split('/')[1]).then(res => setPosts(res));
+    }, []);
 
     return (
         <div className={ styles.container }>
@@ -14,7 +21,7 @@ export const ThirdProfileSection = ({ isMine = false }) => {
 
             <div className={ styles.buttonContainer }>
                 {(isMine) && (
-                    <Link to={ `/${ user.username }/saved` } className={ styles.button }>
+                    <Link to={ `/${ useContext(AuthContext).user.username }/saved` } className={ styles.button }>
                         <i className="far fa-bookmark"></i>
                         Ver publicaciones guardadas
                     </Link>
@@ -23,18 +30,15 @@ export const ThirdProfileSection = ({ isMine = false }) => {
 
 
             <div className={ styles.postsContainer }>
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
+                {posts.map(post => (
+                    <Post 
+                        key={ post._id } 
+                        postId={ post._id }
+                        image={ post.image }
+                    />
+                ))}
+
+                { posts.length === 0 && <h1>No hay publicaciones</h1> }
             </div>
         </div>
     );

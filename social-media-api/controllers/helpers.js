@@ -27,6 +27,55 @@ const getUserByUsername = async(req, res = response) => {
     }
 }
 
+const getPostById = async(req, res = response) => {
+    const { postId } = req.params;
+
+    try {
+        const post = await Post.findById(postId);
+
+        if (!post) return res.status(404).json({
+            ok: false,
+            msg: 'Publicación no encontrada.'
+        });
+
+        delete post._doc.__v;
+
+        res.status(200).json({
+            ok: true,
+            ...post._doc
+        });
+    } catch(error) {
+        unknownError(res, error);
+    }
+}
+
+const getAllPostsByUsername = async(req, res = response) => {
+    const { username } = req.params;
+
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) return res.status(404).json({
+            ok: false,
+            msg: 'Usuario no encontrado.'
+        });
+
+        let posts = await Post.find({ username });
+
+        posts = posts.map(post => {
+            delete post._doc.__v;
+            return post;
+        });
+
+        res.status(200).json({
+            ok: true,
+            posts
+        });
+    } catch(error) {
+        unknownError(res, error);
+    }
+}
+
 const createUserPost = async(req, res = response) => {
     const { username } = req.body;
 
@@ -52,5 +101,7 @@ const createUserPost = async(req, res = response) => {
 
 module.exports = {
     getUserByUsername,
+    getPostById,
+    getAllPostsByUsername,
     createUserPost
 }

@@ -1,31 +1,43 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { usePosts } from '../../hooks';
 import { useForm } from '../../hooks/useForm';
 import styles from '../../styles/social_media/pages/FullscreenPost.module.css';
 import { Comment } from '../components/';
 
 const defaultImage = 'https://fondosmil.com/fondo/17010.jpg';
-const defaultImagePost = 'https://cdn.discordapp.com/attachments/1008885821027405958/1059480358606864384/Captura_de_pantalla_2023-01-02_a_las_11.35.59.png';
 const initialForm = { comment: '' };
 
 export const FullscreenPost = () => {
 
     const { postId } = useParams();
     const { comment, onInputChange } = useForm(initialForm);
+    const [post, setPost] = useState({});
+    const { getPostById } = usePosts();
 
-    const postUser = { 
-        username: 'chikicazenave_' 
-    }
+    useEffect(() => {
+        getPostById(postId).then(post => setPost(post));
+    }, []);
 
     return (
         <div className="container">
             <div className={ styles.container }>
-                <img src={ defaultImagePost } className={ styles.leftContainer } />
+                <img src={ post.image } className={ styles.leftContainer } />
 
                 <div className={ styles.rightContainer }>
                     <div className={ styles.rightContainerHeader }>
                         <div className={ styles.rightContainerHeaderLeft }>
                             <img src={ defaultImage } className={ styles.profileImage } />
-                            <Link to={ `/${ postUser.username }` } className={ styles.profileUsername }>{ postUser.username }</Link>
+                            <div>
+                                <Link to={ `/${ post.username }` } className={ styles.profileUsername }>{ post.username }</Link>
+                                <p style={{
+                                    fontSize: '.8em',
+                                    marginTop: '.3rem'
+                                }}>
+                                    { post.title }
+                                </p>
+                            </div>
+
                         </div>
 
                         <button className={ styles.options }>
