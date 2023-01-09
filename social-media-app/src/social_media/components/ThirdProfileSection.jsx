@@ -31,7 +31,7 @@ export const ThirdProfileSection = ({ isMine = false }) => {
 
             <div className={ styles.postsContainer }>
                 {posts.map(post => (
-                    <Post 
+                    <Post
                         key={ post._id } 
                         postId={ post._id }
                         image={ post.image }

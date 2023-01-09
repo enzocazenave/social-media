@@ -14,7 +14,7 @@ export const Comment = () => {
             <div className={ styles.commentInfo }>
                 <h3 className={ styles.commentTitle }>{ postUser.username }</h3>
                 <p className={ styles.commentText }>Enim ut consequat voluptate ex quis enim eiusmod cillum magna.</p>
-                <span className={ styles.commentDate }>17 sem</span>
+                <span className={ styles.commentDate }>18 sem</span>
             </div>
         </div>
     )
