@@ -1,8 +1,8 @@
 const { model, Schema } = require('mongoose');
 
 const PostSchema = Schema({
-    username: {
-        type: String,
+    user: {
+        type: Object,
         required: true
     },
     title: {
@@ -11,6 +11,12 @@ const PostSchema = Schema({
     image: {
         type: String,
         required: true
+    },
+    likes: {
+        type: Array,
+    },
+    comments: {
+        type: Array,
     },
 });
 

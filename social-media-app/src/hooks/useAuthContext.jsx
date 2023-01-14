@@ -1,16 +1,16 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import api from '../api/api';
 import { AuthContext } from '../context/AuthContext';
+import { getUserByUsername } from '../helpers';
 
 export const useAuthContext = () => {
     const { user, status, errorMessage, setUser, setStatus, setErrorMessage } = useContext(AuthContext);
-    
+
     const login = async(credentials) => {
         const { user: email_username, password } = credentials;
 
         if (email_username.length === 0) return setErrorMessage('El correo electrónico o nombre de usuario es obligatorio.');
         if (password.length < 6) return setErrorMessage('La contraseña debe tener 6 o más caractéres.');
-        console.log()
 
         setStatus('checking');
 

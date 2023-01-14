@@ -28,16 +28,16 @@ export const ThirdProfileSection = ({ isMine = false }) => {
                 )}
             </div>
 
-
             <div className={ styles.postsContainer }>
                 {posts.map(post => (
                     <Post
                         key={ post._id } 
                         postId={ post._id }
                         image={ post.image }
+                        likes={ post.likes.length }
+                        comments={ post.comments.length }
                     />
                 ))}
-
                 { posts.length === 0 && <h1>No hay publicaciones</h1> }
             </div>
         </div>

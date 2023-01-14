@@ -8,9 +8,7 @@ import { Loader } from './';
 
 Modal.setAppElement('#root');
 
-const initialForm = {
-    title: ''
-}
+const initialForm = { title: '' };
 
 export const CreatePostModal = () => {
 
@@ -18,9 +16,9 @@ export const CreatePostModal = () => {
     const { createPostModalIsOpen, setCreatePostModalIsOpen } = useContext(UiContext);
     const [isImageInMemory, setIsImageInMemory] = useState(false);
     const { title, onInputChange, onResetForm } = useForm(initialForm);
+    const { uploadPost } = usePosts();
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef();
-    const { uploadPost } = usePosts();
 
     const resetStatesHooks = () => {
         setIsImageInMemory(false);
@@ -122,11 +120,6 @@ export const CreatePostModal = () => {
                     }       
                 </>
             }
-            
-
-            
-            
-            
         </Modal>
     )
 }

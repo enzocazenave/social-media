@@ -1,23 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getUserByUsername } from '../../../helpers';
+import { useAuthContext } from '../../../hooks';
 import { FirstProfileSection, SecondProfileSection, ThirdProfileSection } from '../../components';
 
 export const UserProfilePage = () => {
-    const { username } = useParams();
-    const [user, setUser] = useState({});
-    const [ready, setReady] = useState(false);
-
-    useEffect(() => {
-        getUserByUsername(username).then(res => {
-            setUser(res);
-            setReady(true);
-        });
-    }, []);
-    
-    if (!ready) return (
-        <h1>Cargando...</h1>
-    )
+    const { user } = useAuthContext()
 
     return (
         <div className="container">

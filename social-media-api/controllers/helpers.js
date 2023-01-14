@@ -2,6 +2,7 @@ const { response } = require('express');
 const { unknownError } = require('../helpers/unknownError');
 const User = require('../models/User');
 const Post = require('../models/Post');
+const { default: mongoose } = require('mongoose');
 
 const getUserByUsername = async(req, res = response) => {
     const { username } = req.params;
@@ -44,6 +45,7 @@ const getPostById = async(req, res = response) => {
             ok: true,
             ...post._doc
         });
+
     } catch(error) {
         unknownError(res, error);
     }
@@ -60,7 +62,7 @@ const getAllPostsByUsername = async(req, res = response) => {
             msg: 'Usuario no encontrado.'
         });
 
-        let posts = await Post.find({ username });
+        let posts = await Post.find({user: { username, image: user.image }});
 
         posts = posts.map(post => {
             delete post._doc.__v;
@@ -87,6 +89,12 @@ const createUserPost = async(req, res = response) => {
             msg: 'Usuario no encontrado o sesión no válida.'
         });
 
+        req.body.user = {
+            username,
+            image: user.image
+        };
+        delete req.body.username;
+
         const post = new Post(req.body);
         await post.save();
 
@@ -99,9 +107,59 @@ const createUserPost = async(req, res = response) => {
     }
 }
 
+const likePostById = async(req, res = response) => {
+    const { postId } = req.params;
+    const { username } = req.body;
+
+    try {
+        const post = await Post.findById(postId);
+
+        if (!post) return res.status(404).json({
+            ok: false,
+            msg: 'Publicación no encontrada.'
+        });
+
+        if (post.likes.some(user => user == username)) {
+            post.likes.remove(username);
+        } else {
+            post.likes.push(username);
+        }
+
+        post.save();
+
+        res.status(200).json({ ok: true });
+    } catch(error) {
+        unknownError(res, error);
+    }
+}
+
+const commentPostById = async(req, res = response) => {
+    const { postId } = req.params;
+    const { comment, user } = req.body;
+
+    try {
+        const post = await Post.findById(postId);
+
+        if (!post) return res.status(404).json({
+            ok: false,
+            msg: 'Publicación no encontrada.'
+        });
+
+        post.comments.push({ id: mongoose.Types.ObjectId(), comment, user });
+        post.save();
+
+        res.status(200).json({ ok: true, ...post.comments[post.comments.length - 1] });
+    } catch(error) {
+        unknownError(res, error);
+    }
+
+} 
+
 module.exports = {
     getUserByUsername,
     getPostById,
     getAllPostsByUsername,
-    createUserPost
+    createUserPost,
+    likePostById,
+    commentPostById
 }

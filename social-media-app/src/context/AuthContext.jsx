@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import api from '../api/api';
+import { getUserByUsername } from '../helpers';
 
 export const AuthContext = createContext({});
 
@@ -8,10 +9,17 @@ export const AuthProvider = ({ children }) => {
     const [status, setStatus] = useState('checking');
     const [errorMessage, setErrorMessage] = useState('');
 
+    
     useEffect(() => {
         validateToken();
     }, []);
 
+    useEffect(() => {
+        if (status === 'authenticated') {
+            getUserByUsername(user.username).then(res => setUser(res)); 
+        }
+    }, [status]);
+    
     const validateToken = async() => {
         try {
             const { data } = await api.get('/auth/renew');
