@@ -119,7 +119,7 @@ const likePostById = async(req, res = response) => {
             msg: 'Publicación no encontrada.'
         });
 
-        if (post.likes.some(user => user == username)) {
+        if (post.likes.some(user => user === username)) {
             post.likes.remove(username);
         } else {
             post.likes.push(username);
@@ -152,8 +152,43 @@ const commentPostById = async(req, res = response) => {
     } catch(error) {
         unknownError(res, error);
     }
-
 } 
+
+const savePostById = async(req, res = response) => {
+    const { postId } = req.params;
+    const { username } = req.body;
+
+    try {
+        const post = await Post.findById(postId);
+
+        if (!post) return res.status(404).json({
+            ok: false,
+            msg: 'Publicación no encontrada.'
+        });
+
+        const user = await User.findOne({ username });
+
+        if (!user) return res.status(404).json({
+            ok: false,
+            msg: 'Usuario no encontrado.'
+        });
+
+        if (user.savedPosts.some(id => id === postId)) {
+            user.savedPosts.remove(postId);
+            post.usersThatSave.remove(username);
+        } else {
+            user.savedPosts.push(postId);
+            post.usersThatSave.push(username);
+        }
+
+        user.save();
+        post.save();
+
+        res.status(200).json({ ok: true });
+    } catch(error) {
+        unknownError(res, error);
+    }
+}
 
 module.exports = {
     getUserByUsername,
@@ -161,5 +196,6 @@ module.exports = {
     getAllPostsByUsername,
     createUserPost,
     likePostById,
-    commentPostById
+    commentPostById,
+    savePostById
 }

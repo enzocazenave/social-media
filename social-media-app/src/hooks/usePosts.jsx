@@ -76,6 +76,14 @@ export const usePosts = () => {
             return error.response.data.msg;
         }
     }
+
+    const savePostById = async(id) => {
+        try {
+            await api.post(`/post/${ id }/save`, { username: user.username });
+        } catch(error) {
+            return error.response.data.msg;
+        }
+    } 
     
     return {
         //* MÉTODOS
@@ -83,7 +91,8 @@ export const usePosts = () => {
         getPostById,
         getAllPostsByUsername,
         likePostById,
-        commentPostById
+        commentPostById,
+        savePostById
 
         //* PROPIEDADES
     }

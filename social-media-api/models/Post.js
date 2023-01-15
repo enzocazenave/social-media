@@ -18,6 +18,9 @@ const PostSchema = Schema({
     comments: {
         type: Array,
     },
+    usersThatSave: {
+        type: Array,
+    }
 });
 
 module.exports = model('Post', PostSchema);

@@ -48,6 +48,22 @@ export const SecondProfileSection = () => {
                 <img className={ styles.historyImage } src={ defaultImageHistory } />
                 <h4 className={ styles.historyTitle }>V. Gesell 22</h4>
             </div>
+            <div className={ styles.history }>
+                <img className={ styles.historyImage } src={ defaultImageHistory } />
+                <h4 className={ styles.historyTitle }>V. Gesell 22</h4>
+            </div>
+            <div className={ styles.history }>
+                <img className={ styles.historyImage } src={ defaultImageHistory } />
+                <h4 className={ styles.historyTitle }>V. Gesell 22</h4>
+            </div>
+            <div className={ styles.history }>
+                <img className={ styles.historyImage } src={ defaultImageHistory } />
+                <h4 className={ styles.historyTitle }>V. Gesell 22</h4>
+            </div>
+            <div className={ styles.history }>
+                <img className={ styles.historyImage } src={ defaultImageHistory } />
+                <h4 className={ styles.historyTitle }>V. Gesell 22</h4>
+            </div>
         </div>
     )
 }

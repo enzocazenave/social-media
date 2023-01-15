@@ -9,16 +9,16 @@ export const AuthProvider = ({ children }) => {
     const [status, setStatus] = useState('checking');
     const [errorMessage, setErrorMessage] = useState('');
 
-    
-    useEffect(() => {
-        validateToken();
-    }, []);
-
     useEffect(() => {
         if (status === 'authenticated') {
             getUserByUsername(user.username).then(res => setUser(res)); 
         }
     }, [status]);
+    
+    useEffect(() => {
+        validateToken();
+    }, []);
+
     
     const validateToken = async() => {
         try {

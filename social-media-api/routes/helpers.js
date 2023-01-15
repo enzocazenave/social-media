@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUserByUsername, createUserPost, getPostById, getAllPostsByUsername, likePostById, commentPostById } = require('../controllers/helpers');
+const { getUserByUsername, createUserPost, getPostById, getAllPostsByUsername, likePostById, commentPostById, savePostById } = require('../controllers/helpers');
 
 const router = Router();
 
@@ -23,5 +23,9 @@ router.post('/post/:postId/comment', [
     check('comment', 'El comentario es obligatorio').not().isEmpty(),
     check('user', 'Es obligatorio estar en una sesión').isObject(),
 ], commentPostById);
+
+router.post('/post/:postId/save', [
+    check('username', 'Es obligatorio estar en una sesión').not().isEmpty()
+], savePostById);
 
 module.exports = router;

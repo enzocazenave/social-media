@@ -28,6 +28,9 @@ const UserSchema = Schema({
     },
     bio: {
         type: String,
+    },
+    savedPosts: {
+        type: Array,
     }
 });
 
